@@ -1,0 +1,59 @@
+{# app/Resources/views/security/login.html.twig #}
+{# ... you will probably extend your base template, like base.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+{% if error %}
+    <div class="alert alert-danger">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <strong>Error!</strong> {{ error.messageKey|trans(error.messageData, 'security') }}
+    </div>
+{% endif %}
+
+{#<form action="{{ path('login') }}" method="post">#}
+    {#<label for="username">Username:</label>#}
+    {#<input type="text" id="username" name="_username" value="{{ last_username }}" />#}
+
+    {#<label for="password">Password:</label>#}
+    {#<input type="password" id="password" name="_password" />#}
+
+    {##}
+        {#If you want to control the URL the user#}
+        {#is redirected to on success (more details below)#}
+        {#<input type="hidden" name="_target_path" value="/account" />#}
+    {##}
+
+    {#<button type="submit">login</button>#}
+{#</form>#}
+
+    <div class="row login-form">
+        <div class="well">
+            <form action="{{ path('login') }}" method="post" autocomplete="off">
+                <fieldset>
+                    <legend><i class="fa fa-lock" aria-hidden="true"></i> Login</legend>
+                    <div class="form-group">
+                        <label for="username">Usuario</label>
+                        <input type="text" id="username" name="_username" required value="{{ last_username }}" class="form-control"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Contraseña</label>
+                        <input type="password" id="password" name="_password" required class="form-control" />
+                    </div>
+                    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}"/>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fa fa-sign-in" aria-hidden="true"></i> Ingresar
+                            </button>
+                        </div>
+                        <div class="col-md-6">
+                            <a class="btn btn-danger" href="{{ path('register') }}">Registrate</a>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+
+{% endblock %}

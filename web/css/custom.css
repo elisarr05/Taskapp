@@ -1,0 +1,28 @@
+body {
+  padding-top: 50px;
+}
+.starter-template {
+  padding: 20px 15px;
+  text-align: center;
+}
+.row{
+  margin-bottom: 20px;
+  margin-top: 20px;
+}
+.title{
+  margin-bottom: 40px;
+}
+#usuario-detalle p, #tarea-detalle p{
+    text-align: left;
+    font-size: 30px;
+}
+.login-form .well{
+    max-width: 400px;
+    margin: auto;
+}
+.register-form .form-group{
+    text-align: left;
+}
+table tbody tr td {
+    text-align: left;
+}
