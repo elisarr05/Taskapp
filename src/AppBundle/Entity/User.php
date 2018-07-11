@@ -4,6 +4,8 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Doctrine\Common\Collections\ArrayCollection;
+
 
 /**
  * User
@@ -13,6 +15,16 @@ use Symfony\Component\Security\Core\User\UserInterface;
  */
 class User implements UserInterface
 {
+    /**
+     * @ORM\OneToMany(targetEntity="Ticket", mappedBy="tecnico")
+     */
+    private $tickets;
+
+    public function __construct()
+    {
+        $this->tickets = new ArrayCollection();
+    }
+
     /**
      * @var int
      *
