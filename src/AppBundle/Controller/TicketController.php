@@ -41,13 +41,11 @@ class TicketController extends Controller
      */
     public function newAction(Request $request)
     {
-        $tecnicoId = $request->request->get('appbundle_ticket')['tecnico_id'];
-        var_dump($tecnicoId);
-
         $userEm = $this->getDoctrine()->getManager();
         $tecnicos = $userEm->getRepository('AppBundle:User')->findAll();
 
         $ticket = new Ticket();
+
         $form = $this->createForm('AppBundle\Form\TicketType', $ticket, array(
             'tecnicos' => $tecnicos
         ));
@@ -58,9 +56,6 @@ class TicketController extends Controller
         $ticket->setUsuarioId($user->getId());
         $ticket->setFecha(new \DateTime());
         $ticket->setEstado('Pendiente');
-        $ticket->setTecnicoId(46);
-
-        var_dump($ticket->getTecnicoId());
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();

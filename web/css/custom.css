@@ -26,3 +26,9 @@ body {
 table tbody tr td {
     text-align: left;
 }
+.display-flex{
+    display: flex;
+}
+.margin-auto{
+    margin: auto;
+}

@@ -49,13 +49,6 @@ class Ticket
     private $usuarioId;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="tecnico_id", type="integer")
-     */
-    private $tecnicoId;
-
-    /**
      * @var string
      *
      * @ORM\Column(name="estado", type="string", length=255)
@@ -146,30 +139,6 @@ class Ticket
     }
 
     /**
-     * Set tecnicoId
-     *
-     * @param integer $tecnicoId
-     *
-     * @return Ticket
-     */
-    public function setTecnicoId($tecnicoId)
-    {
-        $this->tecnicoId = $tecnicoId;
-
-        return $this;
-    }
-
-    /**
-     * Get tecnicoId
-     *
-     * @return int
-     */
-    public function getTecnicoId()
-    {
-        return $this->tecnicoId;
-    }
-
-    /**
      * Set estado
      *
      * @param string $estado
@@ -191,6 +160,22 @@ class Ticket
     public function getEstado()
     {
         return $this->estado;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getTecnico()
+    {
+        return $this->tecnico;
+    }
+
+    /**
+     * @param mixed $tecnico
+     */
+    public function setTecnico($tecnico)
+    {
+        $this->tecnico = $tecnico;
     }
 }
 

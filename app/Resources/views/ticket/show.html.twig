@@ -1,6 +1,23 @@
-{% extends 'base.html.twig' %}
+{% extends 'baseNormal.html.twig' %}
 
 {% block body %}
+
+    <div class="row ticket-show">
+        <div class="col-sm-8">
+            <div class="display-flex">
+                <p class="pull-left ">Asignacion # <b> {{ ticket.id }}</b></p>
+                <p class="margin-auto">{% if ticket.fecha %}{{ ticket.fecha|date('Y-m-d') }}{% endif %}</p>
+                <a href="/ticket/cambiar-estado?estado=EN_PROCCESO" class="btn btn-primary">Iniciar</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm--12">
+            <p class="btn btn-primary pull-left">{{ ticket.estado }}</p>
+        </div>
+    </div>
+
     <h1>Ticket</h1>
 
     <table>
@@ -23,7 +40,7 @@
             </tr>
             <tr>
                 <th>Tecnicoid</th>
-                <td>{{ ticket.tecnicoId }}</td>
+                <td>{{ ticket.tecnico.nombres }}</td>
             </tr>
             <tr>
                 <th>Estado</th>

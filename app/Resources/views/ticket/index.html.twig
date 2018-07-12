@@ -1,9 +1,16 @@
 {% extends 'baseNormal.html.twig' %}
 
 {% block body %}
-    <h1>Tickets list</h1>
+    <div class="row">
+        <div class="col-sm-6">
+            <h1 class="pull-left">Tickets list</h1>
+        </div>
+        <div class="col-sm-6">
+            <a class="btn btn-primary pull-right" href="{{ path('ticket_new') }}">Create a new ticket</a>
+        </div>
+    </div>
 
-    <table>
+    <table class="table table-hover">
         <thead>
             <tr>
                 <th>Id</th>
@@ -22,26 +29,15 @@
                 <td>{{ ticket.descripccion }}</td>
                 <td>{% if ticket.fecha %}{{ ticket.fecha|date('Y-m-d') }}{% endif %}</td>
                 <td>{{ ticket.usuarioId }}</td>
-                <td>{{ ticket.tecnicoId }}</td>
+                <td>{{ ticket.tecnico.nombres }}</td>
                 <td>{{ ticket.estado }}</td>
                 <td>
-                    <ul>
-                        <li>
-                            <a href="{{ path('ticket_show', { 'id': ticket.id }) }}">show</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('ticket_edit', { 'id': ticket.id }) }}">edit</a>
-                        </li>
-                    </ul>
+                    <a class="badge badge-success" href="{{ path('ticket_show', { 'id': ticket.id }) }}">show</a>
+                    <a class="badge badge-success" href="{{ path('ticket_edit', { 'id': ticket.id }) }}">edit</a>
                 </td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <ul>
-        <li>
-            <a href="{{ path('ticket_new') }}">Create a new ticket</a>
-        </li>
-    </ul>
 {% endblock %}
