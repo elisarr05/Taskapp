@@ -28,7 +28,7 @@
                 <td><a href="{{ path('ticket_show', { 'id': ticket.id }) }}">{{ ticket.id }}</a></td>
                 <td>{{ ticket.descripccion }}</td>
                 <td>{% if ticket.fecha %}{{ ticket.fecha|date('Y-m-d') }}{% endif %}</td>
-                <td>{{ ticket.usuarioId }}</td>
+                <td>{{ ticket.usuario.nombres }}</td>
                 <td>{{ ticket.tecnico.nombres }}</td>
                 <td>{{ ticket.estado }}</td>
                 <td>

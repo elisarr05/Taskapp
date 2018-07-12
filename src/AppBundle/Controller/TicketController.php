@@ -24,13 +24,24 @@ class TicketController extends Controller
      */
     public function indexAction()
     {
-        $em = $this->getDoctrine()->getManager();
-
-        $tickets = $em->getRepository('AppBundle:Ticket')->findAll();
-
+        $user = $this->getUser();
+        $tickets = $user->getUsuarioTickets();
         return $this->render('ticket/index.html.twig', array(
             'tickets' => $tickets,
         ));
+    }
+
+    /**
+     * @Route("/cabiarEstado")
+    */
+    public function cambiarEstado()
+    {
+        $user = $this->getUser();
+        $tickets = $user->getTickets();
+        return $this->render('default/indexTecnico.html.twig', [
+            'user' => $user,
+            'tickets' => $tickets
+        ]);
     }
 
     /**
@@ -53,7 +64,8 @@ class TicketController extends Controller
 
         $user = $this->getUser();
 
-        $ticket->setUsuarioId($user->getId());
+//        $ticket->setUsuarioId($user->getId());
+        $ticket->setUsuario($user);
         $ticket->setFecha(new \DateTime());
         $ticket->setEstado('Pendiente');
 

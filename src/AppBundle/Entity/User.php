@@ -20,9 +20,15 @@ class User implements UserInterface
      */
     private $tickets;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Ticket", mappedBy="usuario")
+     */
+    private $usuarioTickets;
+
     public function __construct()
     {
         $this->tickets = new ArrayCollection();
+        $this->usuarioTickets = new ArrayCollection();
     }
 
     /**
@@ -225,6 +231,38 @@ class User implements UserInterface
     public function setPlainPassword($password)
     {
         $this->plainPassword = $password;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getTickets()
+    {
+        return $this->tickets;
+    }
+
+    /**
+     * @param mixed $tickets
+     */
+    public function setTickets($tickets)
+    {
+        $this->tickets = $tickets;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getUsuarioTickets()
+    {
+        return $this->usuarioTickets;
+    }
+
+    /**
+     * @param mixed $usuarioTickets
+     */
+    public function setUsuarioTickets($usuarioTickets)
+    {
+        $this->usuarioTickets = $usuarioTickets;
     }
 }
 

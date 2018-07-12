@@ -35,6 +35,12 @@ class Ticket
     private $tecnico;
 
     /**
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="usuarioTickets")
+     * @ORM\JoinColumn(name="usuario_id", referencedColumnName="id")
+     */
+    private $usuario;
+
+    /**
      * @var \DateTime
      *
      * @ORM\Column(name="fecha", type="date")
@@ -115,30 +121,6 @@ class Ticket
     }
 
     /**
-     * Set usuarioId
-     *
-     * @param integer $usuarioId
-     *
-     * @return Ticket
-     */
-    public function setUsuarioId($usuarioId)
-    {
-        $this->usuarioId = $usuarioId;
-
-        return $this;
-    }
-
-    /**
-     * Get usuarioId
-     *
-     * @return int
-     */
-    public function getUsuarioId()
-    {
-        return $this->usuarioId;
-    }
-
-    /**
      * Set estado
      *
      * @param string $estado
@@ -176,6 +158,22 @@ class Ticket
     public function setTecnico($tecnico)
     {
         $this->tecnico = $tecnico;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getUsuario()
+    {
+        return $this->usuario;
+    }
+
+    /**
+     * @param mixed $usuario
+     */
+    public function setUsuario($usuario)
+    {
+        $this->usuario = $usuario;
     }
 }
 

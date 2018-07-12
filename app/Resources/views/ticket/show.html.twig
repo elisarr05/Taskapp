@@ -18,48 +18,64 @@
         </div>
     </div>
 
-    <h1>Ticket</h1>
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="row">
+                <div class="col-sm-4 text-right">Solicitado Por:</div>
+                <div class="col-sm-8 text-left">{{ ticket.usuario.nombres }}</div>
+            </div>
+            <div class="row">
+                <div class="col-sm-4 text-right">Descripcion:</div>
+                <div class="col-sm-8 text-left">{{ ticket.descripccion }}</div>
+            </div>
+        </div>
+        <div class="col-sm-6">
 
-    <table>
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ ticket.id }}</td>
-            </tr>
-            <tr>
-                <th>Descripccion</th>
-                <td>{{ ticket.descripccion }}</td>
-            </tr>
-            <tr>
-                <th>Fecha</th>
-                <td>{% if ticket.fecha %}{{ ticket.fecha|date('Y-m-d') }}{% endif %}</td>
-            </tr>
-            <tr>
-                <th>Usuarioid</th>
-                <td>{{ ticket.usuarioId }}</td>
-            </tr>
-            <tr>
-                <th>Tecnicoid</th>
-                <td>{{ ticket.tecnico.nombres }}</td>
-            </tr>
-            <tr>
-                <th>Estado</th>
-                <td>{{ ticket.estado }}</td>
-            </tr>
-        </tbody>
-    </table>
+        </div>
+    </div>
 
-    <ul>
-        <li>
-            <a href="{{ path('ticket_index') }}">Back to the list</a>
-        </li>
-        <li>
-            <a href="{{ path('ticket_edit', { 'id': ticket.id }) }}">Edit</a>
-        </li>
-        <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
-            {{ form_end(delete_form) }}
-        </li>
-    </ul>
+    {#<h1>Ticket</h1>#}
+
+    {#<table>#}
+        {#<tbody>#}
+            {#<tr>#}
+                {#<th>Id</th>#}
+                {#<td>{{ ticket.id }}</td>#}
+            {#</tr>#}
+            {#<tr>#}
+                {#<th>Descripccion</th>#}
+                {#<td>{{ ticket.descripccion }}</td>#}
+            {#</tr>#}
+            {#<tr>#}
+                {#<th>Fecha</th>#}
+                {#<td>{% if ticket.fecha %}{{ ticket.fecha|date('Y-m-d') }}{% endif %}</td>#}
+            {#</tr>#}
+            {#<tr>#}
+                {#<th>Usuarioid</th>#}
+                {#<td>{{ ticket.usuario.nombres }}</td>#}
+            {#</tr>#}
+            {#<tr>#}
+                {#<th>Tecnicoid</th>#}
+                {#<td>{{ ticket.tecnico.nombres }}</td>#}
+            {#</tr>#}
+            {#<tr>#}
+                {#<th>Estado</th>#}
+                {#<td>{{ ticket.estado }}</td>#}
+            {#</tr>#}
+        {#</tbody>#}
+    {#</table>#}
+
+    {#<ul>#}
+        {#<li>#}
+            {#<a href="{{ path('ticket_index') }}">Back to the list</a>#}
+        {#</li>#}
+        {#<li>#}
+            {#<a href="{{ path('ticket_edit', { 'id': ticket.id }) }}">Edit</a>#}
+        {#</li>#}
+        {#<li>#}
+            {#{{ form_start(delete_form) }}#}
+                {#<input type="submit" value="Delete">#}
+            {#{{ form_end(delete_form) }}#}
+        {#</li>#}
+    {#</ul>#}
 {% endblock %}

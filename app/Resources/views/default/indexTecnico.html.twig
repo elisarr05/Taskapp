@@ -1,5 +1,37 @@
 {% extends 'baseTecnico.html.twig' %}
 
 {% block body %}
-    <h1>Bienvenido: {{ user.nombres }}</h1>
+
+    <h1>Mis asignaciones</h1>
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>Fecha</th>
+            <th>Usuario</th>
+            <th>Estado</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for ticket in tickets %}
+            <tr>
+                <td>{{ ticket.id }}</td>
+                <td>{% if ticket.fecha %}{{ ticket.fecha|date('Y-m-d') }}{% endif %}</td>
+                <td>{{ ticket.usuario.nombres }}</td>
+                <td>{{ ticket.estado }}</td>
+                <td>
+                    <a class="badge badge-success" href="tickets/{{ ticket.id }}">Ver</a>
+                    {% if ticket.estado == 'Pendiente' %}
+                        <a class="badge badge-success" href="ticket/cambiarEstado?estado=En_proceso&ticketId={{ ticket.id }}">Iniciar</a>
+                    {% endif %}
+                    {% if ticket.estado == 'En_proceso' %}
+                        <a class="badge badge-success" href="ticket/cambiarEstado?estado=Terminado&ticketid={{ ticket.id }}">Terminar</a>
+                    {% endif %}
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
 {% endblock %}

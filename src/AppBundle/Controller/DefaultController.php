@@ -28,8 +28,10 @@ class DefaultController extends Controller
                 'user' => $user
             ]);
         }elseif ($role == 'ROLE_TECNICO'){
+            $tickets = $user->getTickets();
             return $this->render('default/indexTecnico.html.twig', [
-                'user' => $user
+                'user' => $user,
+                'tickets' => $tickets
             ]);
         }
 
