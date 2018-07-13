@@ -15,29 +15,23 @@ class DefaultController extends Controller
     public function indexAction(Request $request)
     {
         $user = $this->getUser();
+
         if(is_null($user)){
             return $this->render('default/index.html.twig', [
                 'base_dir' => realpath($this->getParameter('kernel.project_dir')).DIRECTORY_SEPARATOR,
+                'role' => ''
             ]);
         }
+
         $roles = $user->getRoles();
         $role = array_values($roles)[0];
+        $tickets = $user->getTickets();
 
-        if($role == 'ROLE_NORMAL'){
-            return $this->render('default/indexNormal.html.twig', [
-                'user' => $user
-            ]);
-        }elseif ($role == 'ROLE_TECNICO'){
-            $tickets = $user->getTickets();
-            return $this->render('default/indexTecnico.html.twig', [
-                'user' => $user,
-                'tickets' => $tickets
-            ]);
-        }
-
-        // replace this example code with whatever you need
         return $this->render('default/index.html.twig', [
-            'base_dir' => realpath($this->getParameter('kernel.project_dir')).DIRECTORY_SEPARATOR,
+            'user' => $user,
+            'tickets' => $tickets,
+            'role' => $role
         ]);
+
     }
 }

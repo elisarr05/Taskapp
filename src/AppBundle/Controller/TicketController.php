@@ -8,6 +8,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
 /**
  * Ticket controller.
@@ -26,22 +27,32 @@ class TicketController extends Controller
     {
         $user = $this->getUser();
         $tickets = $user->getUsuarioTickets();
+        $roles = $user->getRoles();
+        $role = array_values($roles)[0];
         return $this->render('ticket/index.html.twig', array(
             'tickets' => $tickets,
+            'role' => $role,
         ));
     }
 
     /**
-     * @Route("/cabiarEstado")
-    */
-    public function cambiarEstado()
+     * Finds and displays a ticket entity.
+     *
+     * @Route("/{id}/cambiarEstado/", name="ticket_cambiar_estado")
+     * @Method("GET")
+     */
+    public function cambiarEstadoAction(Ticket $ticket)
     {
-        $user = $this->getUser();
-        $tickets = $user->getTickets();
-        return $this->render('default/indexTecnico.html.twig', [
-            'user' => $user,
-            'tickets' => $tickets
-        ]);
+
+        if($ticket->getEstado() == 'Pendiente'){
+            $ticket->setEstado('En_proceso');
+        }elseif ($ticket->getEstado() == 'En_proceso'){
+            $ticket->setEstado('Terminado');
+        }
+
+        $this->getDoctrine()->getManager()->flush();
+
+        return $this->redirectToRoute('homepage');
     }
 
     /**
@@ -93,9 +104,14 @@ class TicketController extends Controller
     {
         $deleteForm = $this->createDeleteForm($ticket);
 
+        $user = $this->getUser();
+        $roles = $user->getRoles();
+        $role = array_values($roles)[0];
+
         return $this->render('ticket/show.html.twig', array(
             'ticket' => $ticket,
             'delete_form' => $deleteForm->createView(),
+            'role' => $role
         ));
     }
 

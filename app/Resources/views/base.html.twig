@@ -15,7 +15,6 @@
     </head>
     <body>
 
-
     <nav class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
@@ -28,22 +27,54 @@
                 <a class="navbar-brand" href="/">TaskApp</a>
             </div>
             <div id="navbar" class="collapse navbar-collapse">
-                <ul class="nav navbar-nav">
-                    <li class="">
-                        <a href="#">Inicio</a>
-                    </li>
-                    <li class="">
-                        <a href="#">Nosotros</a>
-                    </li>
-                    <li class="">
-                        <a href="#">Contacto</a>
-                    </li>
-                </ul>
-                <ul class="nav navbar-nav pull-right">
-                    <li>
-                        <a href="/login">Login</a>
-                    </li>
-                </ul>
+                {% if role is defined and  role == 'ROLE_NORMAL' %}
+                    <ul class="nav navbar-nav">
+                        <li class="">
+                            <a href="/user">Usuarios</a>
+                        </li>
+                        <li class="">
+                            <a href="/ticket">Ticket</a>
+                        </li>
+                        <li class="">
+                            <a href="/register">Registrar Usuario</a>
+                        </li>
+                    </ul>
+                    <ul class="nav navbar-nav pull-right">
+                        <li>
+                            <a href="/logout">Logout</a>
+                        </li>
+                    </ul>
+
+                {% elseif  role is defined and  role == 'ROLE_TECNICO' %}
+                    <ul class="nav navbar-nav">
+                        <li class="">
+                            <a href="#">Mis Tareas</a>
+                        </li>
+                    </ul>
+                    <ul class="nav navbar-nav pull-right">
+                        <li>
+                            <a href="/logout">Logout</a>
+                        </li>
+                    </ul>
+
+                {% else %}
+                    <ul class="nav navbar-nav">
+                        <li class="">
+                            <a href="#">Inicio</a>
+                        </li>
+                        <li class="">
+                            <a href="#">Nosotros</a>
+                        </li>
+                        <li class="">
+                            <a href="#">Contacto</a>
+                        </li>
+                    </ul>
+                    <ul class="nav navbar-nav pull-right">
+                        <li>
+                            <a href="/login">Login</a>
+                        </li>
+                    </ul>
+                {% endif %}
             </div>
         </div>
     </nav>

@@ -21,12 +21,12 @@
                 <td>{{ ticket.usuario.nombres }}</td>
                 <td>{{ ticket.estado }}</td>
                 <td>
-                    <a class="badge badge-success" href="tickets/{{ ticket.id }}">Ver</a>
+                    <a class="btn btn-success" href="ticket/{{ ticket.id }}">Ver</a>
                     {% if ticket.estado == 'Pendiente' %}
-                        <a class="badge badge-success" href="ticket/cambiarEstado?estado=En_proceso&ticketId={{ ticket.id }}">Iniciar</a>
+                        <a class="btn btn-primary" href="ticket/{{ ticket.id }}/cambiarEstado">Iniciar</a>
                     {% endif %}
                     {% if ticket.estado == 'En_proceso' %}
-                        <a class="badge badge-success" href="ticket/cambiarEstado?estado=Terminado&ticketid={{ ticket.id }}">Terminar</a>
+                        <a class="btn btn-danger" href="ticket/{{ ticket.id }}/cambiarEstado">Terminar</a>
                     {% endif %}
                 </td>
             </tr>
