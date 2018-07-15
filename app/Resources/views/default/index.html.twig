@@ -3,9 +3,10 @@
 {% block body %}
     {% if role == 'ROLE_NORMAL' %}
         {% include 'default/indexNormal.html.twig' %}
-    {% endif %}
-    {% if role == 'ROLE_TECNICO' %}
+    {% elseif role == 'ROLE_TECNICO' %}
         {% include 'default/indexTecnico.html.twig'  %}
+    {% else %}
+        <h1>TaskApp</h1>
     {% endif %}
 {% endblock %}
 

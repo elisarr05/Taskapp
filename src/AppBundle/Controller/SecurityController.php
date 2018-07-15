@@ -88,9 +88,15 @@ class SecurityController extends Controller
             return $this->redirectToRoute('homepage');
         }
 
-        return $this->render(
-            'security/register.html.twig',
-            array('form' => $form->createView())
+
+        $userLogueado = $this->getUser();
+        $roles = $userLogueado->getRoles();
+        $roleLogueado = array_values($roles)[0];
+
+        return $this->render('security/register.html.twig', array(
+            'form' => $form->createView(),
+            'role'  => $roleLogueado
+            )
         );
     }
 

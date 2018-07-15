@@ -41,6 +41,9 @@
                     </ul>
                     <ul class="nav navbar-nav pull-right">
                         <li>
+                            <a>{{ user.nombres }}</a>
+                        </li>
+                        <li>
                             <a href="/logout">Logout</a>
                         </li>
                     </ul>
@@ -48,10 +51,13 @@
                 {% elseif  role is defined and  role == 'ROLE_TECNICO' %}
                     <ul class="nav navbar-nav">
                         <li class="">
-                            <a href="#">Mis Tareas</a>
+                            <a href="/">Mis Tareas</a>
                         </li>
                     </ul>
                     <ul class="nav navbar-nav pull-right">
+                        <li>
+                            <a>{{ user.nombres }}</a>
+                        </li>
                         <li>
                             <a href="/logout">Logout</a>
                         </li>
@@ -86,14 +92,14 @@
         </div>
 
 
+
+
         <script src="{{ asset('js/jquery.min.js') }}"></script>
         <script>window.jQuery || document.write('<script src="{{ asset('js/jquery.min.js') }}"><\/script>')</script>
         <script src="{{ asset('js/bootstrap.min.js') }}"></script>
         <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
         <script src="{{ asset('js/ie10-viewport-bug-workaround.js') }}"></script>
 
-
         {% block javascripts %}{% endblock %}
-    </body>
     </body>
 </html>

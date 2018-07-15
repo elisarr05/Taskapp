@@ -16,6 +16,11 @@ use Doctrine\Common\Collections\ArrayCollection;
 class User implements UserInterface
 {
     /**
+     * @ORM\OneToMany(targetEntity="Nota", mappedBy="usuario")
+     */
+    private $notas;
+
+    /**
      * @ORM\OneToMany(targetEntity="Ticket", mappedBy="tecnico")
      */
     private $tickets;
@@ -29,6 +34,7 @@ class User implements UserInterface
     {
         $this->tickets = new ArrayCollection();
         $this->usuarioTickets = new ArrayCollection();
+        $this->notas = new ArrayCollection();
     }
 
     /**

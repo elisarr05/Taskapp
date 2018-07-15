@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Nota;
 use AppBundle\Entity\Ticket;
 use AppBundle\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -9,6 +10,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Symfony\Component\Validator\Constraints\Date;
 
 /**
  * Ticket controller.
@@ -26,6 +28,9 @@ class TicketController extends Controller
     public function indexAction()
     {
         $user = $this->getUser();
+        if(is_null($user)){
+            return $this->redirectToRoute('homepage');
+        }
         $tickets = $user->getUsuarioTickets();
         $roles = $user->getRoles();
         $role = array_values($roles)[0];
@@ -33,6 +38,33 @@ class TicketController extends Controller
             'tickets' => $tickets,
             'role' => $role,
         ));
+    }
+
+    /**
+     * Creates a new nota.
+     * @Route("/agregarNota", name="agregar_nota")
+     */
+    public function agregarNotaAction(Request $request)
+    {
+        $notaMensaje = $request->get('nota');
+        $ticketId = $request->get('ticketId');
+
+        $emTicket = $this->getDoctrine()->getManager()->getRepository('AppBundle:Ticket');
+        $ticket = $emTicket->find($ticketId);
+
+        $user = $this->getUser();
+
+        $nota = new Nota();
+        $nota->setNota($notaMensaje);
+        $nota->setTicket($ticket);
+        $nota->setFecha(new \DateTime());
+        $nota->setUsuario($user);
+
+        $emNota = $this->getDoctrine()->getManager();
+        $emNota->persist($nota);
+        $emNota->flush();
+
+        return $this->redirectToRoute('ticket_show', array('id' => $ticketId));
     }
 
     /**
@@ -75,7 +107,6 @@ class TicketController extends Controller
 
         $user = $this->getUser();
 
-//        $ticket->setUsuarioId($user->getId());
         $ticket->setUsuario($user);
         $ticket->setFecha(new \DateTime());
         $ticket->setEstado('Pendiente');
@@ -105,13 +136,22 @@ class TicketController extends Controller
         $deleteForm = $this->createDeleteForm($ticket);
 
         $user = $this->getUser();
+
+        if(is_null($user)){
+            return $this->redirectToRoute('login', array('id' => $ticket->getId()));
+        }
+
         $roles = $user->getRoles();
         $role = array_values($roles)[0];
+
+        $notas = $ticket->getNotas();
 
         return $this->render('ticket/show.html.twig', array(
             'ticket' => $ticket,
             'delete_form' => $deleteForm->createView(),
-            'role' => $role
+            'role' => $role,
+            'notas' => $notas,
+            'user' => $user
         ));
     }
 
