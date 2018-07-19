@@ -30,19 +30,10 @@ class TicketType extends AbstractType
                     return $entity ? $entity->getId() : '';
                 })
             )
-//            ->add('tecnico', CollectionType::class, array(
-//                    'entry_type' => ChoiceType::class,
-//                    'entry_options' => array(
-//                        'choices' => $tecnicos,
-//                        'choice_label' => function ($choiceValue, $key, $value) {
-//                            return $choiceValue->getNombres();
-//                        },
-//                        'choice_value' => function ($entity = null) {
-//                            return $entity ? $entity->getId() : '';
-//                        }
-//                    ))
-//            )
-            ->add('descripccion', TextareaType::class);
+
+            ->add('descripccion', TextareaType::class, array(
+                'label'=>'Descripcin'
+            ));
     }
 
     /**

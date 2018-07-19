@@ -37,6 +37,7 @@ class TicketController extends Controller
         return $this->render('ticket/index.html.twig', array(
             'tickets' => $tickets,
             'role' => $role,
+            'user' => $user
         ));
     }
 

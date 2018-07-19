@@ -1,5 +1,3 @@
-$(document).ready(function () {
-   $("#abrirNotasModal").click(function () {
-       $("#notasModal").modal("show");
-   });
-});
+$(document).ready( function () {
+    $('#ticketTable').DataTable();
+} );

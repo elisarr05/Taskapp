@@ -30,10 +30,13 @@ class UserController extends Controller
         $users = $em->getRepository('AppBundle:User')->findAll();
 
         $user = $this->getUser();
+        $roles = $user->getRoles();
+        $role = array_values($roles)[0];
 
         return $this->render('user/index.html.twig', array(
             'users' => $users,
-            'user' => $user
+            'user' => $user,
+            'role' => $role
         ));
     }
 
@@ -57,9 +60,15 @@ class UserController extends Controller
             return $this->redirectToRoute('user_show', array('id' => $user->getId()));
         }
 
+        
+        $user = $this->getUser();
+        $roles = $user->getRoles();
+        $role = array_values($roles)[0];
+
         return $this->render('user/new.html.twig', array(
             'user' => $user,
             'form' => $form->createView(),
+            'role' => $role
         ));
     }
 
@@ -73,9 +82,14 @@ class UserController extends Controller
     {
         $deleteForm = $this->createDeleteForm($user);
 
+        $user = $this->getUser();
+        $roles = $user->getRoles();
+        $role = array_values($roles)[0];
+
         return $this->render('user/show.html.twig', array(
             'user' => $user,
             'delete_form' => $deleteForm->createView(),
+            'role' => $role
         ));
     }
 
@@ -97,10 +111,15 @@ class UserController extends Controller
             return $this->redirectToRoute('user_edit', array('id' => $user->getId()));
         }
 
+        $user = $this->getUser();
+        $roles = $user->getRoles();
+        $role = array_values($roles)[0];
+
         return $this->render('user/edit.html.twig', array(
             'user' => $user,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
+            'role' => $role
         ));
     }
 

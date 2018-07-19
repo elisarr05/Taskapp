@@ -32,3 +32,9 @@ table tbody tr td {
 .margin-auto{
     margin: auto;
 }
+.margin-right-15{
+    margin-right: 15px;
+}
+.negrita{
+    font-weight: bold;
+}

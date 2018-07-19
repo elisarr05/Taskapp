@@ -5,14 +5,14 @@
     <div class="row ticket-show">
         <div class="col-sm-8">
             <div class="display-flex">
-                <p class="pull-left ">Asignacion # <b> {{ ticket.id }}</b></p>
+                <p class="pull-left ">Asignación # <b> {{ ticket.id }}</b></p>
                 <p class="margin-auto">{% if ticket.fecha %}{{ ticket.fecha|date('Y-m-d') }}{% endif %}</p>
 
                 {% if ticket.estado == 'Pendiente' %}
-                    <a class="btn btn-primary" href="ticket/{{ ticket.id }}/cambiarEstado">Iniciar</a>
+                    <a class="btn btn-primary btn-sm" href="{{ ticket.id }}/cambiarEstado">Iniciar</a>
                 {% endif %}
                 {% if ticket.estado == 'En_proceso' %}
-                    <a class="btn btn-danger" href="ticket/{{ ticket.id }}/cambiarEstado">Terminar</a>
+                    <a class="btn btn-danger" href="{{ ticket.id }}/cambiarEstado">Terminar</a>
                 {% endif %}
 
             </div>

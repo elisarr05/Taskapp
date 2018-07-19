@@ -3,23 +3,23 @@
 {% block body %}
     <div class="row">
         <div class="col-sm-6">
-            <h1 class="pull-left">Tickets list</h1>
+            <h1 class="pull-left">Lista de ticket</h1>
         </div>
         <div class="col-sm-6">
-            <a class="btn btn-primary pull-right" href="{{ path('ticket_new') }}">Create a new ticket</a>
+            <a class="btn btn-primary pull-right" href="{{ path('ticket_new') }}">Crear nuevo ticket</a>
         </div>
     </div>
 
-    <table class="table table-hover">
+    <table id="ticketTable" class="table table-hover">
         <thead>
             <tr>
                 <th>Id</th>
-                <th>Descripccion</th>
+                <th>Descripción</th>
                 <th>Fecha</th>
-                <th>Usuarioid</th>
-                <th>Tecnicoid</th>
+                <th>Usuario</th>
+                <th>Técnico</th>
                 <th>Estado</th>
-                <th>Actions</th>
+                <th>Opciones</th>
             </tr>
         </thead>
         <tbody>
@@ -32,12 +32,14 @@
                 <td>{{ ticket.tecnico.nombres }}</td>
                 <td>{{ ticket.estado }}</td>
                 <td>
-                    <a class="badge badge-success" href="{{ path('ticket_show', { 'id': ticket.id }) }}">show</a>
-                    <a class="badge badge-success" href="{{ path('ticket_edit', { 'id': ticket.id }) }}">edit</a>
+                    <a class="btn btn-primary" href="{{ path('ticket_show', { 'id': ticket.id }) }}">Ver</a>
                 </td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
+{% endblock %}
+{% block javascripts %}
+        <script src="{{ asset('js/ticket.js') }}"></script>
 {% endblock %}

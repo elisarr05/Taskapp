@@ -12,6 +12,7 @@
         <script src="{{ asset('js/ie-emulation-modes-warning.js') }}"></script>
         <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
         {% block stylesheets %}{% endblock %}
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">       
     </head>
     <body>
 
@@ -30,13 +31,13 @@
                 {% if role is defined and  role == 'ROLE_NORMAL' %}
                     <ul class="nav navbar-nav">
                         <li class="">
-                            <a href="/user">Usuarios</a>
+                            <a href="/user">Usuario</a>
                         </li>
                         <li class="">
                             <a href="/ticket">Ticket</a>
                         </li>
                         <li class="">
-                            <a href="/register">Registrar Usuario</a>
+                            <a href="/register">Registrar usuario</a>
                         </li>
                     </ul>
                     <ul class="nav navbar-nav pull-right">
@@ -44,7 +45,7 @@
                             <a>{{ user.nombres }}</a>
                         </li>
                         <li>
-                            <a href="/logout">Logout</a>
+                            <a href="/logout">Cerrar sesión</a>
                         </li>
                     </ul>
 
@@ -59,7 +60,7 @@
                             <a>{{ user.nombres }}</a>
                         </li>
                         <li>
-                            <a href="/logout">Logout</a>
+                            <a href="/logout">Cerrar sesión</a>
                         </li>
                     </ul>
 
@@ -99,6 +100,7 @@
         <script src="{{ asset('js/bootstrap.min.js') }}"></script>
         <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
         <script src="{{ asset('js/ie10-viewport-bug-workaround.js') }}"></script>
+        <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
 
         {% block javascripts %}{% endblock %}
     </body>
